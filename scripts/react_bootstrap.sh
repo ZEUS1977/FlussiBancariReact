@@ -1,5 +1,7 @@
 #!/bin/bash
-npm install react-bootstrap --save
+cd ..
+
+sudo npm install react-bootstrap --save
 
 #from www.bootstrapcdn.com:
 #

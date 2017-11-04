@@ -27,5 +27,13 @@
   "devDependencies": {
     "webpack": "^3.8.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZEUS1977/FlussiBancariReact.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ZEUS1977/FlussiBancariReact/issues"
+  },
+  "homepage": "https://github.com/ZEUS1977/FlussiBancariReact#readme",
   "description": ""
 }

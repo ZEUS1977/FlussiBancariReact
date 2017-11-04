@@ -11,16 +11,6 @@ class App extends React.Component {
          <div>
            <MyNavBar></MyNavBar>
            <Body></Body>
-         	<h1>Benvenuto</h1>
-            <ul>
-               <li><Link to = "/home">Home</Link></li>
-               <li><Link to = "/registration"> Registration</Link></li>
-               <li><Link to = "/login">Login</Link></li>
-               <li><Link to = "/about">About</Link></li>
-               <li><Link to = "/contact">Contact</Link></li>
-            </ul>
-
-           {this.props.children}
          </div>
       )
    }
