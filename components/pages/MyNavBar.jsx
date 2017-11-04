@@ -18,7 +18,7 @@ class MyNavBar extends React.Component {
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">React-Bootstrap</a>
+            <a href="#">Flussi Bancari</a>
           </Navbar.Brand>
           <Navbar.Toggle/>
         </Navbar.Header>
@@ -35,8 +35,8 @@ class MyNavBar extends React.Component {
             </NavDropdown>
           </Nav>
           <Nav pullRight>
-            <NavItem eventKey={1} href="#">Link Right</NavItem>
-            <NavItem eventKey={2} href="#">Link Right</NavItem>
+            <NavItem eventKey={1} href="#">Entra</NavItem>
+            <NavItem eventKey={2} href="#">Registrati</NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

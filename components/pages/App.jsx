@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
 import MyNavBar from './MyNavBar.jsx';
+import Body from './Body.jsx';
 
 class App extends React.Component {
 
@@ -9,6 +10,7 @@ class App extends React.Component {
       return (
          <div>
            <MyNavBar></MyNavBar>
+           <Body></Body>
          	<h1>Benvenuto</h1>
             <ul>
                <li><Link to = "/home">Home</Link></li>
