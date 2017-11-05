@@ -27,9 +27,14 @@ cp ./scripts/.gitignore ./;
 
 cp -f ./scripts/webpack.config.js ./
 
+mkdir ./src;
+
+cp -rf ./scripts/clients ./src;
+cp -rf ./scripts/utils ./src;
+
 mkdir src;
 
-cp ./scripts/app.js ./src;
+cp ./scripts/main.js ./;
 
 node server.js&;
 
