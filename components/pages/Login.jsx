@@ -1,59 +1,63 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {FormGroup, ControlLabel, FormControl, Form, Button} from 'react-bootstrap/lib/';
 
 class Login extends React.Component {
+  constructor(props) {
+      super(props);
 
-    constructor(props) {
-        super(props);
+      this.state = {
+        email: "",
+        password: ""
+      }
+    }
 
-        this.state = {
-           Email: 'ewfew',
-           Password: ''
-        }
-     };
+    validateForm() {
+      return this.state.email.length > 0 && this.state.password.length > 0;
+    }
 
-    handleLogin(ev) {
-        ev.preventDefault();
-        this.setState({
-            Email: this.refs.email.value,
-            Password:this.refs.password.value}
-        );
-    };
-   render() {
-      return (
-        <div>
-          <form>
-                Benvenuto {this.state.Email}
-		            <h1>Login...</h1>
-		            <ul>
-		                <li>
-		                    <h2>Accedi...</h2>
-		                </li>
-		            </ul>
-                <div >
-                  <label >EMail:< i className = "fa fa-user" > </i> < /label>
-  		            <input
-  		                    ref="email"
-  		                    type="text"
-  		                    defaultValue={this.state.Email}
-  		                    onChange={this.handleLogin.bind(this)}
-  		                     />
-                </div>
-                <div >
-  		            <label  >Password:<i className="fa fa-user"></i> </label>
-  		            <input
-  		                    ref="password"
-  		                    type="password"
-  		                    defaultValue={this.state.Password}
-  		                    onChange={this.handleLogin.bind(this)}
-  		                     />
-                </div>
-		            <button onClick={this.handleLogin.bind(this)}> Avanti  </button>
-              </form>
-       </div>
-      )
-   }
+    handleChange = event => {
+      this.setState({
+        [event.target.id]: event.target.value
+      });
+    }
+
+    handleSubmit = event => {
+      event.preventDefault();
+    }
+
+  render() {
+    return (
+    <Form  > 
+      <FormGroup controlId="email" bsSize="sm">
+                <ControlLabel>Email</ControlLabel>
+                <FormControl
+                  bsSize="sm"
+                  autoFocus
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup controlId="password" bsSize="sm">
+                <ControlLabel>Password</ControlLabel>
+                <FormControl
+                  bsSize="sm"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                  type="password"
+                />
+              </FormGroup>
+              <Button
+                block
+                bsSize="sm"
+                disabled={!this.validateForm()}
+                type="submit"
+              >
+                Login
+              </Button>
+      </Form>
+    );
+  }
 }
 
-
-export default Login;
+export default Login

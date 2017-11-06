@@ -1,214 +1,117 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {FormGroup, ControlLabel, FormControl, Form, Button} from 'react-bootstrap/lib/';
 import userClient from '../../src/clients/UserClient.js';
 import jsonUtils from '../../src/utils/JsonUtils.js';
 
 class Registration extends React.Component {
 
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-           UserName: '',
-           Nome: '',
-           Cognome: '',
-           RagioneSociale: '',
-           SettoreAzienda: '',
-           FatturazioneElettronica: '',
-           IndirizzoFatturazione: '',
-           CivicoFatturazione: '',
-           CAPFatturazione: '',
-           ComuneFatturazione: '',
-           SiglaProvinciaFatturazione: '',
-           Email: '',
-           Password: '',
-        };
-
-     };
-
-    handleLogin(ev) {
-        ev.preventDefault();
-        var datas = {
-            UserName: this.refs.user.value,
-            Nome: this.refs.nome.value,
-            Cognome: this.refs.cognome.value,
-            RagioneSociale: this.refs.ragionesociale.value,
-            SettoreAzienda:  this.refs.settoreAzienda.value,
-            FatturazioneElettronica: this.refs.fatturazioneElettronica.value,
-            IndirizzoFatturazione: this.refs.indirizzoFatturazione.value,
-            CivicoFatturazione: this.refs.civicoFatturazione.value,
-            CAPFatturazione: this.refs.CAPFatturazione.value,
-            ComuneFatturazione: this.refs.comuneFatturazione.value,
-            SiglaProvinciaFatturazione: this.refs.siglaProvinciaFatturazione.value,
-            Email: this.refs.email.value,
-            Password:this.refs.password.value,
-
-            };
-        this.setState(datas);
-        var json =  jsonUtils.objToJson(this.state);
-        alert(json);
-        userClient.register(json);
-        alert('called server with: '+ json);
+    this.state = {
+      userName: '',
+      nome: '',
+      cognome: '',
+      ragioneSociale: '',
+      settoreAzienda: '',
+      fatturazioneElettronica: '',
+      indirizzoFatturazione: '',
+      civicoFatturazione: '',
+      CAPFatturazione: '',
+      comuneFatturazione: '',
+      siglaProvinciaFatturazione: '',
+      email: '',
+      password: ''
     };
+    this.textInput ='';
+  };
 
-    validation(ev) {
-        const errors = {};
-        const emailPattern = /(.+)@(.+){2,}\.(.+){2,}/;
-        if (!emailPattern.test(this.refs.email.value)) {
-          errors.email = 'L\'email inserita non é valida!';
-        }
-      }
+getValidationState(){
 
-   render() {
-      return (
-        <div>
-            <form className="form-horizontal">
-            Benvenuto {this.state.User}
-            <h1>Registrazione...</h1>
-            <ul>
-                <li>
-                    <h2>Inserisci i tuoi dati...</h2>
-                </li>
-            </ul>
-            <br/>
-            <div >
-            <label  >Nome Utente:
-                <input
-                        ref="user"
-                        type="text"
-                        defaultValue={this.state.User}
+  if (this.state.userName===null || this.state.userName==='' || this.state.userName == undefined) { return null; }
+  else if(this.state.userName.length < 8)
+    return "error";
+  else
+    return 'success';
 
-                         />
-               </label>
-             </div>
-             <div >
-           <label  >Nome:
-               <input
-                       ref="nome"
-                       type="text"
-                       defaultValue={this.state.Nome}
-                        />
-             </label>
-           </div>
-           <div >
-         <label  >Cognome:
-               <input
-                       ref="cognome"
-                       type="text"
-                       defaultValue={this.state.Cognome}
-                        />
-             </label>
-           </div>
-           <div >
-           <label  >Ragione Sociale:
-               <input
-                       ref="ragionesociale"
-                       type="text"
-                       defaultValue={this.state.RagioneSociale}
-                        />
-             </label>
-           </div>
-           <div >
-           <label  >Settore Azienda:
-               <input
-                       ref="settoreAzienda"
-                       type="text"
-                       defaultValue={this.state.SettoreAzienda}
-                        />
-             </label>
-           </div>
-           <div >
-           <label  >Fatturazione Elettronca:
-               <input
-                       ref="fatturazioneElettronica"
-                       type="text"
-                       defaultValue={this.state.FatturazioneElettronica}
-                        />
-             </label>
-           </div>
-           <div >
-           <label  >Indirizzo Fatturazione:
-               <input
-                       ref="indirizzoFatturazione"
-                       type="text"
-                       defaultValue={this.state.IndirizzoFatturazione}
-                        />
-             </label>
-           </div>
-           <div >
-           <label  >Civico Fatturazione:
-               <input
-                       ref="civicoFatturazione"
-                       type="text"
-                       defaultValue={this.state.CivicoFatturazione}
-                        />
-             </label>
-           </div>
-           <div >
-           <label  >CAP Fatturazione:
-               <input
-                       ref="CAPFatturazione"
-                       type="text"
-                       defaultValue={this.state.CAPFatturazione}
-                        />
-             </label>
-           </div>
-           <div >
-           <label  >Comune Fatturazione:
-               <input
-                       ref="comuneFatturazione"
-                       type="text"
-                       defaultValue={this.state.ComuneFatturazione}
-                        />
-             </label>
-           </div>
-         <div >
-         <label  >Sigla Provincia Fatturazione:
-             <input
-                     ref="siglaProvinciaFatturazione"
-                     type="text"
-                     defaultValue={this.state.SiglaProvinciaFatturazione}
-                      />
-           </label>
-         </div>
-           <div >
-           <label  >EMail:
-           <input
-                    ref="email"
-                    type="text"
-                    defaultValue= {this.state.Email}
-                    onBlur = {this.validation.bind(this)}
-                     />
-              </label>
-            </div>
-            <div >
-            <label  >Password:
-            <input
-                    ref="password"
-                    type="password"
-                    defaultValue={this.state.Password}
+ }
 
-                     />
-              </label>
-            </div>
-            <div >
-            <label  >Ripeti la Password:
-                <input
-                    ref="checkpassword"
-                    type="password"
-                    defaultValue={this.state.CheckPassword}
-                     />
-               </label>
-             </div>
-             <div >
-            <button onClick={(this.handleLogin.bind(this))}> Avanti  </button>
-            </div>
-        </form>
-       </div>
+  validateForm() {
+    if (this.state.userName.length > 0 &&
+      this.state.nome.length > 0 &&
+      this.state.cognome.length > 0 &&
+      this.state.ragioneSociale.length > 0 &&
+      this.state.settoreAzienda.length > 0 &&
+      this.state.fatturazioneElettronica.length > 0 &&
+      this.state.indirizzoFatturazione.length > 0 &&
+      this.state.civicoFatturazione.length > 0 &&
+      this.state.CAPFatturazione.length > 0 &&
+      this.state.comuneFatturazione.length > 0 &&
+      this.state.siglaProvinciaFatturazione.length > 0 &&
+      this.state.email.length > 0 &&
+      this.state.password.length > 0
       )
-   }
+      return true;
+    else
+      return false;
+  }
+
+  handleChange = event => {
+    this.setState({
+      [event.target.id]: event.target.value
+
+    });
+    //alert('handleChange');
+    //alert(jsonUtils.objToJson(this.state));
+  }
+
+  getValidationStatePassword(){
+    if(this.state.password === null || this.state.password === '' || this.state.password === undefined)
+      return null;
+    else if(this.textInput.value != this.state.password)
+      return 'error';
+    else
+      return 'success';
+  }
+
+  handleSubmit(event){
+    if (this.getValidationStatePassword() == 'success'){
+      var json = jsonUtils.objToJson(this.state);
+      alert(json);
+      userClient.register(json);
+      alert('called server with: ' + json);
+    }else{
+      alert('Controlla i dati inseriti');
+    }
+  }
+
+  render() {
+    return (
+      <Form>
+        <FormGroup controlId="userName" bsSize="sm" validationState={this.getValidationState()}>
+          <ControlLabel>Nome Utente</ControlLabel>
+          <FormControl bsSize="sm" autoFocus type="formBasicText" value={this.state.userName} onChange={this.handleChange}/>
+          <FormControl.Feedback />
+        </FormGroup>
+        <FormGroup controlId="email" bsSize="sm">
+          <ControlLabel>Email</ControlLabel>
+          <FormControl bsSize="sm" type="email" value={this.state.email} onChange={this.handleChange}/>
+        </FormGroup>
+        <FormGroup controlId="password" bsSize="sm">
+          <ControlLabel>Password</ControlLabel>
+          <FormControl bsSize="sm" value={this.state.password} onChange={this.handleChange} type="password"/>
+        </FormGroup>
+        <FormGroup controlId="checkPassword" bsSize="sm" validationState={this.getValidationStatePassword()} >
+          <ControlLabel>Ripeti Password</ControlLabel>
+          <FormControl bsSize="sm" onChange={this.handleChange} type="password" inputRef={input => this.textInput = input} />
+        </FormGroup>
+        <Button block bsSize="sm" type="button" onClick={this.handleSubmit.bind(this)}>
+          Registrati
+        </Button>
+
+      </Form>
+    );
+  }
 }
 
-
-
-export default Registration;
+export default Registration
