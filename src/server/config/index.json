@@ -1,0 +1,4 @@
+{
+  "dbUri": "mongodb://localhost/flussi_bancari",
+  "jwtSecret": "a secret phrase!!"
+}

@@ -3,7 +3,7 @@ import {FormGroup, ControlLabel, FormControl, Form, Button,   HelpBlock,
   Grid,
   Row,
   Col} from 'react-bootstrap/lib/';
-  import userClient from '../../clients/UserClient.js';
+  import userClient from '../../nodeclient/UserClient.js';
 
 class Login extends React.Component {
   constructor(props) {

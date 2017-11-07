@@ -10,7 +10,7 @@ import {
   Row,
   Col
 } from 'react-bootstrap/lib/';
-import userClient from '../../clients/UserClient.js';
+import userClient from '../../nodeclient/UserClient.js';
 import jsonUtils from '../../utils/JsonUtils.js';
 
 class Registration extends React.Component {
