@@ -77,6 +77,10 @@ function validateLoginForm(payload) {
 
 router.post('/signup', (req, res, next) => {
   const validationResult = validateSignupForm(req.body);
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Headers", "Origin, Authorization, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   if (!validationResult.success) {
     return res.status(400).json({
       success: false,
@@ -105,7 +109,7 @@ router.post('/signup', (req, res, next) => {
         message: 'Could not process the form.'
       });
     }
-
+    console.log("response: " + res + " header: " +res.header);
     return res.status(200).json({
       success: true,
       message: 'You have successfully signed up! Now you should be able to log in.'
@@ -114,9 +118,13 @@ router.post('/signup', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Headers", "Origin, Authorization, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   const validationResult = validateLoginForm(req.body);
   if (!validationResult.success) {
-    return res.status(400).json({
+    return res.status(200).json({
       success: false,
       message: validationResult.message,
       errors: validationResult.errors
@@ -127,18 +135,17 @@ router.post('/login', (req, res, next) => {
   return passport.authenticate('local-login', (err, token, userData) => {
     if (err) {
       if (err.name === 'IncorrectCredentialsError') {
-        return res.status(400).json({
+        return res.status(200).json({
           success: false,
           message: err.message
         });
       }
 
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
         message: 'Could not process the form.'
       });
     }
-
 
     return res.json({
       success: true,

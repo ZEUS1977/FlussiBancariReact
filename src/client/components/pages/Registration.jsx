@@ -47,7 +47,6 @@ class Registration extends React.Component {
   handleChange = event => {
     this.setState({
       [event.target.id]: event.target.value
-
     });
     //alert('handleChange');
     //alert(jsonUtils.objToJson(this.state));

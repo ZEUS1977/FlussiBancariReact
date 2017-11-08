@@ -21,8 +21,12 @@ module.exports = {
       const password = encodeURIComponent(userDatas.password);
       const formData = `email=${email}&password=${password}`;
       alert(formData)
-      axios.post(resourceUrl+login, formData);
-      // save the token
-      Auth.authenticateUser(response.token);
-    }
+
+      return axios.post(resourceUrl+login, formData)
+            .then(response => {
+              response.data
+            })
+            .catch(error => {
+              error});
+            }
   }

@@ -3,16 +3,26 @@ import {FormGroup, ControlLabel, FormControl, Form, Button,   HelpBlock,
   Grid,
   Row,
   Col} from 'react-bootstrap/lib/';
-  import userClient from '../../nodeclient/UserClient.js';
+import userClient from '../../nodeclient/UserClient.js';
+import Auth from '../../utils/Auth.js';
+var promise = require("es6-promise");
+var axios = require('axios');
+var resourceUrl = "http://localhost:7777";
+var register = "/auth/signup";
+var login = "/auth/login";
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: "",
-      password: ""
-    }
+      errors: {},
+      success: '',
+      message: '',
+      email: '',
+      password: '',
+      user: ''
+    };
   }
   getValidationEmail() {
     if (this.state.email === null || this.state.email === '' || this.state.email === undefined)
@@ -39,10 +49,30 @@ class Login extends React.Component {
 
   handleSubmit(event) {
     if (this.getValidationStatePassword() == 'success' && this.getValidationEmail() == 'success') {
-      //var json = jsonUtils.objToJson(this.state);
-      //alert(json);
-      userClient.login(this.state);
-      //alert('called server with: ' + json);
+      const email = encodeURIComponent(this.state.email);
+      const password = encodeURIComponent(this.state.password);
+      const formData = `email=${email}&password=${password}`;
+      alert(formData)
+
+      axios.post(resourceUrl+login, formData)
+            .then(response => {
+              this.setState({success: response.data.success});
+              this.setState({message: response.data.message});
+
+              if(this.state.success){
+                this.setState({user: response.data.user.name});
+                // save the token
+                Auth.authenticateUser(response.data.token);
+              }
+              this.setState({
+                errors: {}
+              });
+
+
+
+              // change the current URL to /
+              this.props.history.push('/DashBoard');
+            })
     } else {
       alert('Controlla i dati inseriti');
     }
@@ -50,6 +80,7 @@ class Login extends React.Component {
 
   render() {
     return (
+        <div>
       <Grid>
         <Row>
           <Col md={4}>
@@ -72,9 +103,13 @@ class Login extends React.Component {
               </Button>
             </Form>
           </Col>
-          <Col md={4}></Col>
+          <Col md={4}>
+              <h1>{this.state.message}</h1>
+          </Col>
         </Row>
       </Grid>
+
+      </div>
       );
     }
 }

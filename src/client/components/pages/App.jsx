@@ -5,6 +5,8 @@ import MyNavBar from './MyNavBar.jsx';
 import Body from './Body.jsx';
 import Login from './Login.jsx';
 import Registration from './Registration.jsx';
+import DashBoard from './DashBoard.jsx';
+import Auth from '../../utils/Auth.js';
 
 class App extends React.Component {
 
@@ -13,7 +15,8 @@ class App extends React.Component {
          <div>
            <MyNavBar></MyNavBar>
            <Switch>
-            <Route exact path='/'  component={Body} />
+            <Route exact path='/'  component={Body}/>
+            <Route exact path='/dashboard'  component={DashBoard} onEnter={Auth.isUserAuthenticated()}/>
             <Route exact path='/login' component={Login}/>
             <Route exact path='/registration' component={Registration}/>
           </Switch>
