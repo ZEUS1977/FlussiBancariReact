@@ -10,20 +10,21 @@ module.exports = {
   watch: true,
 
   devServer: {
-     inline: true,
-     port: 8080
+    inline: true,
+    port: 3000
   },
 
   module: {
-     loaders: [
-        {
-           test: /\.jsx?$/,
-        exclude: /node_modules/,
+    loaders: [
+      {
+        test: /\.jsx?$/,
         loader: 'babel-loader',
         query: {
           presets: ['react', 'es2015', 'stage-1']
         }
-      }
+      },
+      { test: /\.(png|jpg|xlsx)$/, loader: 'url-loader?limit=5000000' }
     ]
-  }
+  },
+  watch: true
 }

@@ -18,20 +18,19 @@ const MyNavBar = (props) => (
         <LinkContainer to="/about">
           <NavItem eventKey={2}>About</NavItem>
         </LinkContainer>
-        <NavDropdown eventKey={3} title="Gestione MAV" id="basic-nav-dropdown" >
-          <MenuItem eventKey={3.1}>Carica File Excel</MenuItem>
-          <MenuItem eventKey={3.2}>Verifica i movimenti</MenuItem>
-          <MenuItem eventKey={3.3}>Scarica il tracciato CBI</MenuItem>
-          <MenuItem divider/>
-          <MenuItem eventKey={3.3}>Separated link</MenuItem>
-        </NavDropdown>
+        <LinkContainer to="/dashboard">
+          <NavItem eventKey={3}>DashBoard</NavItem>
+        </LinkContainer>
       </Nav>
       <Nav pullRight>
         <LinkContainer to="/login">
           <NavItem eventKey={1}>Entra</NavItem>
         </LinkContainer>
+        <LinkContainer to="/logout">
+          <NavItem eventKey={2}>Esci</NavItem>
+        </LinkContainer>
         <LinkContainer to="/registration">
-          <NavItem eventKey={2}>Registrati</NavItem>
+          <NavItem eventKey={3}>Registrati</NavItem>
         </LinkContainer>
       </Nav>
     </Navbar.Collapse>

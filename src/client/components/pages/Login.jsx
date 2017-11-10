@@ -2,7 +2,7 @@ import React from 'react';
 import {FormGroup, ControlLabel, FormControl, Form, Button,   HelpBlock,
   Grid,
   Row,
-  Col} from 'react-bootstrap/lib/';
+  Col, Well, Panel} from 'react-bootstrap/lib/';
 import userClient from '../../nodeclient/UserClient.js';
 import Auth from '../../utils/Auth.js';
 var promise = require("es6-promise");
@@ -63,6 +63,8 @@ class Login extends React.Component {
                 this.setState({user: response.data.user.name});
                 // save the token
                 Auth.authenticateUser(response.data.token);
+                // change the current URL to /
+                this.props.history.push('/DashBoard');
               }
               this.setState({
                 errors: {}
@@ -70,8 +72,7 @@ class Login extends React.Component {
 
 
 
-              // change the current URL to /
-              this.props.history.push('/DashBoard');
+
             })
     } else {
       alert('Controlla i dati inseriti');
@@ -89,7 +90,8 @@ class Login extends React.Component {
             </h3>
           </Col>
           <Col md={4}>
-            <Form >
+            <Well>
+              <Panel>
               <FormGroup controlId="email" bsSize="sm" validationState={this.getValidationEmail()}>
                 <ControlLabel>Email</ControlLabel>
                 <FormControl bsSize="sm" autoFocus type="email" value={this.state.email} onChange={this.handleChange}/>
@@ -101,7 +103,8 @@ class Login extends React.Component {
               <Button  block bsSize="sm" type='button' onClick={this.handleSubmit.bind(this)}>
                 Entra
               </Button>
-            </Form>
+            </Panel>
+          </Well>
           </Col>
           <Col md={4}>
               <h1>{this.state.message}</h1>
